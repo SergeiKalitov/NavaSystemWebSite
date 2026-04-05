@@ -232,7 +232,7 @@ main, section, footer {
 
 
 .hero {
-    min-height: 80vh; /* Shorter without visual */
+    min-height: 80vh; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
