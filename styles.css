@@ -444,7 +444,89 @@ main, section, footer {
     transform: translateX(5px);
 }
 
+/* Cases Section */
+.bg-dark {
+    background-color: var(--text-main) !important;
+    color: white;
+}
+
+.text-white { color: white; }
+.text-light { color: #94A3B8; }
+
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.case-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.case-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.case-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(29, 78, 216, 0.2);
+    color: var(--accent-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+}
+
+.case-card h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.case-card p {
+    color: #94A3B8;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.case-metrics {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+.metric {
+    font-size: 0.85rem;
+    color: #CBD5E1;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.metric span {
+    opacity: 0.7;
+}
+
+.metric strong {
+    color: white;
+}
+
 /* Consultation Form */
+
 .consultation {
     background: var(--bg-light-gray);
     border-top: 1px solid var(--border-color);
