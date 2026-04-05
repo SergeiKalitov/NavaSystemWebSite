@@ -372,9 +372,9 @@ main, section, footer {
 }
 
 .service-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-    border-color: transparent;
-    transform: translateY(-5px);
+    box-shadow: 0 40px 80px rgba(11, 17, 33, 0.08);
+    border-color: var(--accent-primary);
+    transform: translateY(-8px);
 }
 
 .service-card:hover::after {
@@ -391,13 +391,56 @@ main, section, footer {
     align-items: center;
     justify-content: center;
     color: var(--text-main);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     transition: var(--transition);
 }
 
 .service-card:hover .icon-wrapper {
     background: var(--text-main);
     color: white;
+    transform: rotate(-10deg) scale(1.1);
+}
+
+.service-list {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.service-list li {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.service-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.service-link {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: auto;
+    transition: var(--transition);
+}
+
+.service-card:hover .service-link {
+    color: var(--accent-primary);
+    transform: translateX(5px);
 }
 
 /* About Section */
