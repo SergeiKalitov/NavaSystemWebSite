@@ -317,10 +317,10 @@ main, section, footer {
 .logo-track span {
     font-size: 1.1rem;
     font-weight: 800;
-    color: var(--border-color);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    opacity: 0.4;
+    opacity: 0.6;
     transition: var(--transition);
 }
 
