@@ -446,7 +446,7 @@ main, section, footer {
 
 /* Cases Section */
 .bg-dark {
-    background-color: var(--text-main) !important;
+    background-color: #111827 !important; /* Slightly lighter than absolute black/deep slate */
     color: white;
 }
 
@@ -460,8 +460,8 @@ main, section, footer {
 }
 
 .case-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 2.5rem;
     transition: var(--transition);
@@ -470,10 +470,10 @@ main, section, footer {
 }
 
 .case-card:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     border-color: var(--accent-primary);
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .case-badge {
