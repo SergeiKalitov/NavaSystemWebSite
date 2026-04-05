@@ -298,28 +298,29 @@ main, section, footer {
 /* Logo Carousel */
 .logo-carousel {
     width: 100%;
-    padding: 4rem 0;
+    padding: 2rem 0;
     overflow: hidden;
     position: relative;
     border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
 }
 
 .logo-track {
     display: flex;
-    gap: 5rem;
+    gap: 4rem;
     width: max-content;
-    animation: scroll 40s linear infinite;
+    animation: scroll 60s linear infinite;
 }
 
 .logo-track span {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--border-color);
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    opacity: 0.5;
+    letter-spacing: 0.25em;
+    opacity: 0.4;
     transition: var(--transition);
 }
 
