@@ -190,7 +190,7 @@
                 </div>
 
                 <div class="cases-grid">
-                    <div class="case-card fade-in-up">
+                    <div class="case-card fade-in-up" onclick="openCaseModal()" style="cursor: pointer;" title="Click for details">
                         <span class="case-badge">Supply Chain</span>
                         <h3>Global Logistics Optimization</h3>
                         <p>Implemented a multi-agent AI system for real-time corridor optimization.</p>
@@ -439,6 +439,39 @@
             </div>
         </div>
     </footer>
+    <!-- Logistics Case Modal -->
+    <div id="logistics-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal()">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Supply Chain</span>
+                <h2>Global Logistics Optimization</h2>
+            </div>
+            <div class="modal-body">
+                <img src="images/logistics-dashboard.png" alt="Logistics Dashboard AI showing global routes" class="modal-image">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>Our client, a tier-1 global logistics provider, struggled with legacy ERP systems that introduced up to a 5% leak in operational efficiency. Static routing led to significant delays during port congestions and geopolitical shifts.</p>
+                    <h3>The Solution</h3>
+                    <p>Nava System integrated a multi-agent AI environment. We deployed <strong>AGI-1</strong> for supply chain optimization, <strong>AGI-2</strong> for demand prediction, and <strong>AGI-3</strong> for inventory management. The agents autonomously communicate to reroute shipments in real-time away from bottlenecks.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>+14%</h4>
+                            <p>Revenue Increase</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>-30%</h4>
+                            <p>Routing Latency</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>100%</h4>
+                            <p>Autonomous Rerouting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 

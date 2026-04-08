@@ -50,3 +50,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Modal Logic
+function openCaseModal() {
+    const modal = document.getElementById('logistics-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+}
+
+function closeCaseModal() {
+    const modal = document.getElementById('logistics-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('logistics-modal');
+    if (event.target === modal) {
+        closeCaseModal();
+    }
+});
+// Close modal on Escape key
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeCaseModal();
+    }
+});
