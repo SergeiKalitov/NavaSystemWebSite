@@ -314,7 +314,8 @@ main, section, footer {
     animation: scroll 60s linear infinite;
 }
 
-.logo-track span {
+.logo-track a {
+    display: inline-block;
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--text-muted);
@@ -324,7 +325,7 @@ main, section, footer {
     transition: var(--transition);
 }
 
-.logo-track span:hover {
+.logo-track a:hover {
     color: var(--accent-primary);
     opacity: 1;
     transform: scale(1.1);
