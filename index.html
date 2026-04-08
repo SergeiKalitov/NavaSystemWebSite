@@ -252,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('legal-modal')" style="cursor: pointer;" title="Click for details">
                         <span class="case-badge">Legal Tech</span>
                         <h3>Contract Intelligence RAG</h3>
                         <p>Automated analysis of 10,000+ historical legal documents for risk.</p>
@@ -262,7 +262,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('retail-modal')" style="cursor: pointer; animation-delay: 0.1s;" title="Click for details">
                         <span class="case-badge">Retail</span>
                         <h3>Demand Forecasting Engine</h3>
                         <p>Inventory level optimization for a nationwide retail chain.</p>
@@ -272,7 +272,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('qc-modal')" style="cursor: pointer; animation-delay: 0.2s;" title="Click for details">
                         <span class="case-badge">Quality Control</span>
                         <h3>Vision-Based QC Fleet</h3>
                         <p>High-speed camera integration for defect detection in electronics mfg.</p>
@@ -282,7 +282,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('cyber-modal')" style="cursor: pointer;" title="Click for details">
                         <span class="case-badge">Cybersecurity</span>
                         <h3>Behavioral AI Firewall</h3>
                         <p>Next-gen agentic monitoring for enterprise network intrusions.</p>
@@ -292,7 +292,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('public-modal')" style="cursor: pointer; animation-delay: 0.1s;" title="Click for details">
                         <span class="case-badge">Public Sector</span>
                         <h3>Smart City Traffic AI</h3>
                         <p>Real-time traffic flow optimization for a metropolitan sensor network.</p>
@@ -302,7 +302,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('biotech-modal')" style="cursor: pointer; animation-delay: 0.2s;" title="Click for details">
                         <span class="case-badge">Biotech</span>
                         <h3>Agentic Drug Discovery</h3>
                         <p>Automated R&D research agents for candidate compound screening.</p>
@@ -311,6 +311,7 @@
                             <div class="metric"><span>Candidates:</span> <strong>3 Compounds identified</strong></div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -636,6 +637,210 @@
                         <div class="modal-metric-card">
                             <h4>500+</h4>
                             <p>Vehicles Managed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Tech Case Modal -->
+    <div id="legal-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('legal-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Legal Tech</span>
+                <h2>Contract Intelligence RAG</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800" alt="Legal Intelligence AI Architecture" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A global enterprise struggled with manual review of 10,000+ complex legacy contracts across multiple jurisdictions, exposing them to millions in latent legal risk due to overlooked non-compliance clauses.</p>
+                    <h3>The Solution</h3>
+                    <p>Nava System deployed an autonomous Retrieval-Augmented Generation (RAG) agentic framework. The specialized AI models digest unstructured legal text, cross-reference clauses against dynamic regulatory databases, and instantly highlight high-risk anomalies.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-70%</h4>
+                            <p>Review Time</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>12%</h4>
+                            <p>Missing Clauses Found</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>$1.2M</h4>
+                            <p>Risk Exposure Mitigated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Retail Case Modal -->
+    <div id="retail-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('retail-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Retail</span>
+                <h2>Demand Forecasting Engine</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800" alt="Retail Demand Forecasting Interface" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A nationwide retail chain faced the dual constraints of overstocking low-velocity items and systemic stockouts of high-velocity goods, resulting in crippled working capital and lost sales opportunities.</p>
+                    <h3>The Solution</h3>
+                    <p>We engineered a localized edge-computing network connected to their POS infrastructure. The core <strong>Demand Forecasting AI</strong> integrates local weather forecasts and trend sentiment to adjust supply orders autonomously.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-25%</h4>
+                            <p>Overstock Capital</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>+6%</h4>
+                            <p>Overall Revenue</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>8 mo</h4>
+                            <p>Full ROI Realized</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QC Case Modal -->
+    <div id="qc-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('qc-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Quality Control</span>
+                <h2>Vision-Based QC Fleet</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Vision-Based AI Quality Control" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A high-speed electronics manufacturing line exceeded human visual inspection thresholds. Traditional rule-based machine vision failed dynamically on novel defects, generating a persistent 4% fault rate downstream.</p>
+                    <h3>The Solution</h3>
+                    <p>We installed an edge-AI camera fleet running deterministic computer vision models. The continuous learning pipeline processes images at 120 FPS, categorizing microscopic anomalies and ejecting flawed components in real-time.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-40%</h4>
+                            <p>Downstream Defect Rate</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>120</h4>
+                            <p>Frames Per Second</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>100%</h4>
+                            <p>Automated Compliance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyber Case Modal -->
+    <div id="cyber-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('cyber-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Cybersecurity</span>
+                <h2>Behavioral AI Firewall</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800" alt="Cybersecurity AI Firewall Matrix" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>An enterprise architecture was compromised by sophisticated intrusion attempts bypassing static, signature-based firewall rules. Relentless false alarms from legacy systems resulted in severe alert fatigue for the SOC team.</p>
+                    <h3>The Solution</h3>
+                    <p>We developed a distributed agentic monitoring ecosystem that maps baseline behaviors for all internal nodes. When anomalous topological flow is detected, agents autonomously isolate compromised network segments and trigger immediate forensic snapshots.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>+60%</h4>
+                            <p>Threat Catch Rate</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>-85%</h4>
+                            <p>False Positives</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>&lt;10s</h4>
+                            <p>Containment Response</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Sector Case Modal -->
+    <div id="public-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('public-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Public Sector</span>
+                <h2>Smart City Traffic AI</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=800" alt="Smart City Traffic Optimization Matrix" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A fast-growing metropolitan area suffered from severe day-time traffic gridlock leading to high CO2 emissions. Legacy responsive traffic light systems could not digest or act upon predictive flow variations.</p>
+                    <h3>The Solution</h3>
+                    <p>We integrated a distributed AI traffic controller consuming real-time feeds from 200+ road cameras and sensors. The autonomous agents optimize light timings across entire corridors dynamically to maintain a continuous green wave.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>+20%</h4>
+                            <p>Flow Rate Increased</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>10</h4>
+                            <p>Bottlenecks Solved</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>-12%</h4>
+                            <p>Emissions Reduced</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biotech Case Modal -->
+    <div id="biotech-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('biotech-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Biotech</span>
+                <h2>Agentic Drug Discovery</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=800" alt="Agentic Biomolecular Research AI" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A leading pharmaceutical R&D pipeline was critically bottlenecked at the compound screening phase, taking several years and massive capital to identify viable candidates for clinical trials.</p>
+                    <h3>The Solution</h3>
+                    <p>We developed an autonomous research agent network that digests medical literature and simulates protein folding geometries. The agents hypothesize combinations and run virtual assays thousands of times faster than manual processes.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-40%</h4>
+                            <p>Screening Cost</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>3</h4>
+                            <p>Viable Compounds</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>-2 yrs</h4>
+                            <p>Time to Trial</p>
                         </div>
                     </div>
                 </div>
