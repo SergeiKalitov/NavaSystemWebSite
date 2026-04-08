@@ -52,32 +52,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Modal Logic
-function openCaseModal() {
-    const modal = document.getElementById('logistics-modal');
+function openCaseModal(modalId) {
+    const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 }
 
-function closeCaseModal() {
-    const modal = document.getElementById('logistics-modal');
+function closeCaseModal(modalId) {
+    const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
 }
 
-// Close modal when clicking outside of it
 window.addEventListener('click', (event) => {
-    const modal = document.getElementById('logistics-modal');
-    if (event.target === modal) {
-        closeCaseModal();
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.classList.remove('active');
+        document.body.style.overflow = '';
     }
 });
 // Close modal on Escape key
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-        closeCaseModal();
+        const activeModals = document.querySelectorAll('.modal-overlay.active');
+        activeModals.forEach(modal => {
+            modal.classList.remove('active');
+        });
+        document.body.style.overflow = '';
     }
 });

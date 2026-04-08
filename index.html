@@ -190,7 +190,7 @@
                 </div>
 
                 <div class="cases-grid">
-                    <div class="case-card fade-in-up" onclick="openCaseModal()" style="cursor: pointer;" title="Click for details">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('logistics-modal')" style="cursor: pointer;" title="Click for details">
                         <span class="case-badge">Supply Chain</span>
                         <h3>Global Logistics Optimization</h3>
                         <p>Implemented a multi-agent AI system for real-time corridor optimization.</p>
@@ -201,7 +201,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('robotics-modal')" style="cursor: pointer; animation-delay: 0.1s;" title="Click for details">
                         <span class="case-badge">Robotics</span>
                         <h3>Autonomous Warehouse Fleet</h3>
                         <p>Fully integrated physical robot swarm for 24/7 fulfillment operations.</p>
@@ -212,7 +212,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('fintech-modal')" style="cursor: pointer; animation-delay: 0.2s;" title="Click for details">
                         <span class="case-badge">Fintech</span>
                         <h3>Real-time Fraud Shield</h3>
                         <p>AI-driven fraud detection for high-frequency transaction environments.</p>
@@ -442,7 +442,7 @@
     <!-- Logistics Case Modal -->
     <div id="logistics-modal" class="modal-overlay" aria-hidden="true">
         <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal()">&times;</button>
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('logistics-modal')">&times;</button>
             <div class="modal-header">
                 <span class="case-badge">Supply Chain</span>
                 <h2>Global Logistics Optimization</h2>
@@ -466,6 +466,74 @@
                         <div class="modal-metric-card">
                             <h4>100%</h4>
                             <p>Autonomous Rerouting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Robotics Case Modal -->
+    <div id="robotics-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('robotics-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Robotics</span>
+                <h2>Autonomous Warehouse Fleet</h2>
+            </div>
+            <div class="modal-body">
+                <img src="images/warehouse-dashboard.png" alt="Warehouse Robotics Dashboard AI" class="modal-image">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A national retail fulfillment center suffered from high error rates and downtime due to manual handling and disparate sorting systems. Meeting next-day delivery promises was becoming structurally unviable.</p>
+                    <h3>The Solution</h3>
+                    <p>We engineered a localized edge-computing network connected to a fleet of 150+ autonomous mobile robots (AMRs). The central <strong>OmniNet Fulfillment AI</strong> coordinates pathing in a deterministic 3D space, virtually eliminating collisions and optimizing pick routes dynamically.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>+22%</h4>
+                            <p>Throughput Increase</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>100%</h4>
+                            <p>Real-time Control</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>14 mo</h4>
+                            <p>Full ROI Realized</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fintech Case Modal -->
+    <div id="fintech-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('fintech-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Fintech</span>
+                <h2>Real-time Fraud Shield</h2>
+            </div>
+            <div class="modal-body">
+                <img src="images/fintech-dashboard.png" alt="Fintech Fraud Detection Dashboard" class="modal-image">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A leading digital bank saw rapid increases in card-not-present fraud. Their traditional rules-based engine generated false positives that frustrated legitimate users, while missing sophisticated multi-vector attacks.</p>
+                    <h3>The Solution</h3>
+                    <p>We built <strong>Fintech Sentinel AI</strong>, an deep neural network architecture analyzing behavioral biometrics and transaction flows in under 5 milliseconds. The system flags topological anomalies instantly, freezing suspicious paths without human intervention.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>$2.4M</h4>
+                            <p>Annual Savings</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>&lt;5ms</h4>
+                            <p>Detection Time</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>98.6%</h4>
+                            <p>Positive Precision</p>
                         </div>
                     </div>
                 </div>
