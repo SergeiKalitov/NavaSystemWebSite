@@ -354,25 +354,13 @@ main, section, footer {
     background: #FFFFFF; 
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 3.5rem 2.5rem 2.5rem;
+    padding: 2.5rem;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
     display: flex;
     flex-direction: column;
-}
-
-.service-id {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.15em;
-    opacity: 0.4;
 }
 
 .service-card::before {
