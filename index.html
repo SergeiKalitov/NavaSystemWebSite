@@ -222,7 +222,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('manufacturing-modal')" style="cursor: pointer;" title="Click for details">
                         <span class="case-badge">Manufacturing</span>
                         <h3>Predictive Energy Grid</h3>
                         <p>Smart monitoring for multi-site industrial energy consumption.</p>
@@ -232,7 +232,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('agents-modal')" style="cursor: pointer; animation-delay: 0.1s;" title="Click for details">
                         <span class="case-badge">AI Agents</span>
                         <h3>Enterprise Support Orchestrator</h3>
                         <p>Deployment of autonomous agents for multi-lingual technical support.</p>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="case-card fade-in-up" onclick="openCaseModal('fleet-modal')" style="cursor: pointer; animation-delay: 0.2s;" title="Click for details">
                         <span class="case-badge">Fleet Mgmt</span>
                         <h3>Smart Routing AI</h3>
                         <p>Dynamic route optimization for a fleet of 500+ commercial vehicles.</p>
@@ -534,6 +534,108 @@
                         <div class="modal-metric-card">
                             <h4>98.6%</h4>
                             <p>Positive Precision</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manufacturing Case Modal -->
+    <div id="manufacturing-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('manufacturing-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Manufacturing</span>
+                <h2>Predictive Energy Grid</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Energy Grid Dashboard Placeholder" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A multi-site heavy equipment manufacturer was experiencing unpredictable power spikes and hidden equipment degradation, leading to millions in wasted energy and costly unplanned downtime across 12 facilities.</p>
+                    <h3>The Solution</h3>
+                    <p>We deployed a predictive energy monitoring network utilizing IoT sensors and a centralized machine learning engine. The system builds real-time digital twins of power consumption, identifying anomalous draws from degrading machinery weeks before failure.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-18%</h4>
+                            <p>Energy Waste</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>12</h4>
+                            <p>Faults Prevented</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>24/7</h4>
+                            <p>Continuous Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Agents Case Modal -->
+    <div id="agents-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('agents-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">AI Agents</span>
+                <h2>Enterprise Support Orchestrator</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="Support Agent Network Dashboard" class="modal-image" style="filter: brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A global SaaS leader was drowning in support tickets. Wait times exceeded 4 hours for technical issues, and scaling the human support team across 15+ languages was becoming cost-prohibitive, tanking user retention.</p>
+                    <h3>The Solution</h3>
+                    <p>We implemented the <strong>Enterprise Support Orchestrator</strong>, an autonomous multi-agent ecosystem. A dispatcher agent routes queries to specialized sub-agents (billing, technical, onboarding) equipped with RAG access to documentation, resolving issues in perfectly localized languages.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>85%</h4>
+                            <p>Automated Resolution</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>+8%</h4>
+                            <p>Retention Lift</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>&lt;1m</h4>
+                            <p>Average Response</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fleet Mgmt Case Modal -->
+    <div id="fleet-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal" onclick="closeCaseModal('fleet-modal')">&times;</button>
+            <div class="modal-header">
+                <span class="case-badge">Fleet Mgmt</span>
+                <h2>Smart Routing AI</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" alt="Global Fleet Routing AI Map" class="modal-image">
+                <div class="modal-text">
+                    <h3>The Challenge</h3>
+                    <p>A commercial delivery network with 500+ vehicles was suffering from inefficient static routing. Fluctuating fuel costs, unpredictable traffic patterns, and strict delivery windows were eroding profit margins significantly.</p>
+                    <h3>The Solution</h3>
+                    <p>Nava System integrated a dynamic deep-reinforcement learning engine. The AI constantly digests weather, traffic, and vehicle telematics to recalculate the mathematically optimal paths for the entire fleet every 10 seconds autonomously.</p>
+                    <div class="modal-metrics">
+                        <div class="modal-metric-card">
+                            <h4>-15%</h4>
+                            <p>Fuel Cost Reduction</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>100%</h4>
+                            <p>Automated Compliance</p>
+                        </div>
+                        <div class="modal-metric-card">
+                            <h4>500+</h4>
+                            <p>Vehicles Managed</p>
                         </div>
                     </div>
                 </div>
