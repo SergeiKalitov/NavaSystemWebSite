@@ -612,11 +612,22 @@
       .hero { padding: 22px; }
       .tab-labels { width: 100%; }
       .tab-labels label { flex: 1 1 auto; text-align: center; }
-      details.category { overflow-x: auto; }
-      table { min-width: 700px; }
-      .package-grid { grid-template-columns: 1fr; }
-      .oem-grid { grid-template-columns: 1fr; }
-      .oem-header, .oem-grid { padding: 18px; }
+      
+      /* Make tables stack on mobile instead of horizontal scroll */
+      table, thead, tbody, th, td, tr { display: block; width: 100%; }
+      thead { display: none; }
+      tbody td { padding: 12px 18px; border-bottom: none; }
+      tbody td:first-child { padding-bottom: 4px; }
+      tbody td:last-child { padding-top: 0; padding-bottom: 18px; }
+      tbody tr { border-bottom: 1px solid var(--line); }
+      tbody tr:last-child { border-bottom: none; }
+      
+      .package-summary-cell { padding: 0 !important; }
+      details.package-details summary { grid-template-columns: 1fr auto; padding: 0 18px; }
+
+      .package-grid { grid-template-columns: 1fr; padding: 0 18px 18px; }
+      .oem-grid { grid-template-columns: 1fr; padding: 18px; }
+      .oem-header { padding: 18px; }
       .oem-note { margin: 0 18px 18px; }
       .service-terms { margin: 0 18px 18px; }
     }
