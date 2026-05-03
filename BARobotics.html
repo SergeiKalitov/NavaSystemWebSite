@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bay Area Robot Service Rates</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #172033;
+      --muted: #5f6b85;
+      --line: #d9e2ec;
+      --accent: #1f4e8c;
+      --accent-soft: #eaf1fb;
+      --shadow: 0 10px 30px rgba(19, 33, 68, 0.08);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    .wrap {
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .rate-validity {
+      margin-top: 18px;
+      color: #7a8498;
+      font-size: 13px;
+    }
+
+
+
+    .tabs {
+      margin-top: 24px;
+    }
+
+    .tabs input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .tab-labels {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 5px;
+      background: #e9eef6;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+
+    .tab-labels label {
+      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      transition: .18s ease;
+    }
+
+    #tab-rates:checked ~ .hero .tab-labels label[for="tab-rates"],
+    #tab-payment:checked ~ .hero .tab-labels label[for="tab-payment"],
+    #tab-oem:checked ~ .hero .tab-labels label[for="tab-oem"] {
+      background: var(--surface);
+      color: var(--accent);
+      box-shadow: 0 4px 14px rgba(19, 33, 68, 0.08);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    #tab-rates:checked ~ .tab-content #rates-panel,
+    #tab-payment:checked ~ .tab-content #payment-panel,
+    #tab-oem:checked ~ .tab-content #oem-panel {
+      display: block;
+    }
+
+    .payment-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .payment-card h2 {
+      margin: 0;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .payment-card h2 .muted {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .payment-card table {
+      border-top: 0;
+    }
+
+    .payment-card td:first-child,
+    .payment-card th:first-child {
+      width: 26%;
+    }
+
+    .condition strong {
+      color: var(--text);
+    }
+
+    .oem-programs {
+      margin-top: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .oem-header {
+      padding: 22px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .oem-eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .oem-header h2 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .oem-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .oem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding: 22px;
+      background: var(--surface-soft);
+    }
+
+    .tier-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .tier-card.recommended {
+      border-color: var(--accent);
+      box-shadow: 0 14px 36px rgba(31, 78, 140, 0.16);
+    }
+
+    .tier-badge {
+      align-self: flex-start;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .tier-card.recommended .tier-badge {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .tier-card h3 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .best-for {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .tier-card ul {
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .tier-card li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+
+    .tier-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .tier-pricing {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .tier-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    .tier-cta:hover,
+    .tier-cta:focus {
+      background: #173d70;
+      box-shadow: 0 8px 18px rgba(31, 78, 140, 0.18);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .oem-note {
+      margin: 0 22px 22px;
+    }
+
+
+    .categories {
+      display: grid;
+      gap: 14px;
+    }
+
+    details.category {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    details.category[open] summary {
+      border-bottom: 1px solid var(--line);
+    }
+
+    summary.category-title {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      background: var(--surface);
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    summary.category-title::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.category-title::after {
+      content: "+";
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 20px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.category[open] summary.category-title::after {
+      content: "−";
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--surface-soft);
+      border-bottom: 1px solid var(--line);
+    }
+
+    tbody td {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      font-size: 16px;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #fbfdff;
+    }
+
+    .service {
+      font-weight: 600;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: pre-line;
+    }
+
+    .package-summary-cell {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    details.package-details summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 68% 32%;
+      align-items: center;
+      min-height: 72px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    details.package-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .package-toggle {
+      justify-self: center;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .package-toggle::before {
+      content: "+";
+    }
+
+    details.package-details[open] .package-toggle::before {
+      content: "−";
+    }
+
+    details.package-details .package-grid {
+      margin: 0 0 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .category-subtitle {
+      margin: 0;
+      padding: 0 22px 16px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .package-option {
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .package-option.popular {
+      border: 2px solid var(--accent);
+      box-shadow: 0 10px 24px rgba(31, 78, 140, 0.14);
+    }
+
+    .package-badge {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .package-badge.popular {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .package-option strong {
+      display: block;
+      color: var(--accent);
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .package-option .package-hours {
+      display: block;
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .package-option span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .package-validity {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .package-disclaimer {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .service-terms {
+      margin: 0 20px 20px;
+      padding: 16px 18px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .service-terms h3 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .service-terms ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-terms li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .service-terms strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      background: var(--accent-soft);
+      border: 1px solid #d8e5f7;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .terms {
+      margin-top: 18px;
+      color: #6b7486;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .terms ol {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 20px, 1040px); padding-top: 20px; }
+      .hero { padding: 22px; }
+      .tab-labels { width: 100%; }
+      .tab-labels label { flex: 1 1 auto; text-align: center; }
+      details.category { overflow-x: auto; }
+      table { min-width: 700px; }
+      .package-grid { grid-template-columns: 1fr; }
+      .oem-grid { grid-template-columns: 1fr; }
+      .oem-header, .oem-grid { padding: 18px; }
+      .oem-note { margin: 0 18px 18px; }
+      .service-terms { margin: 0 18px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="tabs">
+      <input type="radio" name="tabs" id="tab-rates" checked />
+      <input type="radio" name="tabs" id="tab-payment" />
+      <input type="radio" name="tabs" id="tab-oem" />
+
+      <section class="hero">
+        <div class="eyebrow">Virtalink Robotics • Bay Area • San Francisco • Silicon Valley</div>
+        <h1>Robotics Service Rates</h1>
+        <div class="rate-validity">Rates valid through 07.01.2026</div>
+
+        <div class="tab-labels" aria-label="Document tabs">
+          <label for="tab-rates">Rates</label>
+          <label for="tab-payment">Payment Rules</label>
+          <label for="tab-oem">OEM Partnership Programs</label>
+        </div>
+      </section>
+
+      <div class="tab-content">
+        <div class="tab-panel" id="rates-panel">
+    <section class="categories">
+      <details class="category" open>
+        <summary class="category-title">Remote Services</summary>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 68%;">Service</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service">Remote diagnostics / video support <span style="display:block; font-weight:400; color: var(--muted); font-size:13px; margin-top:4px;">Standard troubleshooting and guidance during business hours</span></td>
+              <td class="price">$95/hr</td>
+            </tr>
+            <tr>
+              <td class="service">Emergency remote support <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">For urgent situations that cannot wait: nights, critical downtime, mission-critical incidents</span></td>
+              <td class="price">$180/hr</td>
+            </tr>
+            <tr>
+              <td class="package-summary-cell" colspan="2">
+                <details class="package-details">
+                  <summary>
+                    <span>Pre-paid remote support packages</span>
+                    <span class="package-toggle" aria-hidden="true"></span>
+                  </summary>
+                  <div class="package-grid">
+                    <div class="package-option">
+                      <span class="package-badge">Starter</span>
+                      <span class="package-hours">10 hours</span>
+                      <strong>$850</strong>
+                      <span>$85/hr • ~10% discount</span>
+                      <span class="package-validity">⏱ Valid 6 months</span>
+                    </div>
+                    <div class="package-option popular">
+                      <span class="package-badge popular">Popular</span>
+                      <span class="package-hours">20 hours</span>
+                      <strong>$1,600</strong>
+                      <span>$80/hr • ~16% discount</span>
+                      <span class="package-validity">⏱ Valid 9 months</span>
+                    </div>
+                    <div class="package-option">
+                      <span class="package-badge">Volume</span>
+                      <span class="package-hours">40 hours</span>
+                      <strong>$3,000</strong>
+                      <span>$75/hr • ~21% discount</span>
+                      <span class="package-validity">⏱ Valid 12 months</span>
+                    </div>
+                  </div>
+                  <p class="package-disclaimer">All packages include senior remote engineering support. Unused hours expire at the end of the validity period. Custom volume agreements available for OEM partners.</p>
+                </details>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details class="category" open>
+        <summary class="category-title">On-Site Services</summary>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 68%;">Service</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service">On-site inspection, diagnostics &amp; repair <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Field diagnostics, on-site repair, and parts replacement. Parts billed separately.</span></td>
+              <td class="price">$165/hr + parts</td>
+            </tr>
+            <tr>
+              <td class="service">Robot operator / event support <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Trained operator only — robot not included</span></td>
+              <td class="price">$95/hr</td>
+            </tr>
+            <tr>
+              <td class="service">Operator training &amp; enablement <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Hands-on training for client operators and maintenance staff</span></td>
+              <td class="price">$1,500–3,000/day</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details class="category" open>
+        <summary class="category-title">Maintenance Plans</summary>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 68%;">Service</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service">Scheduled maintenance — one-time visit <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">2 hours on-site, no commitment</span></td>
+              <td class="price">$485</td>
+            </tr>
+            <tr>
+              <td class="service">Scheduled maintenance — monthly plan <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">1 visit/month, 3-month agreement; ~18% off the one-time rate</span></td>
+              <td class="price">$1,185 / 3 months <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">($395/visit)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details class="category" open>
+        <summary class="category-title">Other Services</summary>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 68%;">Service</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service">Equipment pickup &amp; transport to service center <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Within 30 miles of Mountain View, CA</span></td>
+              <td class="price">$175 base + $1.50/mile beyond 30 mi</td>
+            </tr>
+            <tr>
+              <td class="service">Hub repair — active work <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">For complex cases when on-site repair is not possible or efficient</span></td>
+              <td class="price">$1,200/day</td>
+            </tr>
+            <tr>
+              <td class="service">Hub storage / robot custody <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">When robot is held at our facility waiting for parts or scheduling</span></td>
+              <td class="price">$50/day</td>
+            </tr>
+            <tr>
+              <td class="service">Commissioning &amp; deployment — per project</td>
+              <td class="price">$20,000–80,000 per project</td>
+            </tr>
+            <tr>
+              <td class="service">Commissioning — senior engineer <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Hands-on technical execution and integration</span></td>
+              <td class="price">$295/hr</td>
+            </tr>
+            <tr>
+              <td class="service">Commissioning — project lead <span style="display:block; font-weight:400; color: var(--muted); font-size:14px; margin-top:4px;">Project management, client coordination, technical leadership</span></td>
+              <td class="price">$350/hr</td>
+            </tr>
+            <tr>
+              <td class="service">Spare parts logistics</td>
+              <td class="price">15% of part cost + shipping</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+
+
+    <div class="terms">
+      <strong>Terms and conditions</strong>
+      <ol>
+        <li>All prices are estimates and may vary depending on task complexity, urgency, work schedule, and logistics.</li>
+        <li>Maintenance Plans pricing may vary depending on the number of robots under service.</li>
+        <li>On-site services are subject to a minimum service charge. Industry standard minimums are 2 hours or 4 hours per visit, even if the work is completed in less time.</li>
+        <li><strong>On-site service minimum.</strong> Minimum visit: 2 hours ($330) — the minimum charge for an on-site visit, regardless of actual time spent on the job site.</li>
+        <li><strong>Travel charge (Bay Area).</strong> Within a 30-mile radius of Mountain View — included in the service call. Beyond 30 miles — $2.50 per mile one way.</li>
+        <li><strong>Travel time.</strong> Travel time outside the Bay Area is billed at the standard on-site service rate.</li>
+      </ol>
+    </div>
+        </div>
+
+        <div class="tab-panel" id="payment-panel">
+          <section class="payment-card">
+            <h2>Level 1. New Client/Pilot <span class="muted">(first 90 days / first 3 successful payments)</span></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Payment Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="service">Remote support</td>
+                  <td class="condition"><strong>Prepaid blocks</strong> of 10 hours in advance, or credit card on file charged after each session.</td>
+                </tr>
+                <tr>
+                  <td class="service">One-time on-site visit</td>
+                  <td class="condition"><strong>50% deposit</strong> at booking, remaining balance <strong>due on receipt</strong>.</td>
+                </tr>
+                <tr>
+                  <td class="service">Maintenance plan</td>
+                  <td class="condition"><strong>Prepaid for the full period</strong> — 3 months or 1 year in advance.</td>
+                </tr>
+                <tr>
+                  <td class="service">Commissioning ($20–80k)</td>
+                  <td class="condition"><strong>40% deposit</strong> at contract signing<br /><strong>40% at milestone</strong>, such as factory inspection<br /><strong>20% at acceptance</strong> / due on receipt</td>
+                </tr>
+                <tr>
+                  <td class="service">Pickup / transport</td>
+                  <td class="condition"><strong>Prepaid</strong> or credit card on file.</td>
+                </tr>
+                <tr>
+                  <td class="service">Parts logistics</td>
+                  <td class="condition"><strong>100% prepaid</strong>. Parts are paid to suppliers in advance and cannot be financed or credited to the client.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="payment-card">
+            <h2>Level 2. Established Client <span class="muted">(after 3 consecutive clean payments)</span></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Payment Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="service">Remote / on-site</td>
+                  <td class="condition"><strong>Net 15</strong></td>
+                </tr>
+                <tr>
+                  <td class="service">Maintenance plan</td>
+                  <td class="condition"><strong>Net 15</strong> at the beginning of the month or quarter.</td>
+                </tr>
+                <tr>
+                  <td class="service">Commissioning</td>
+                  <td class="condition"><strong>Deposit remains required</strong>. This is standard industry practice regardless of payment history.</td>
+                </tr>
+                <tr>
+                  <td class="service">Parts</td>
+                  <td class="condition"><strong>Net 15</strong> on service margin; parts cost remains prepaid.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="payment-card">
+            <h2>Level 3. Strategic Client <span class="muted">($100k+/year contract, separately approved)</span></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Payment Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="service">All services</td>
+                  <td class="condition"><strong>Net 30</strong>, monthly billing, annual minimum contract.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <div class="terms">
+            <strong>Payment terms and safeguards</strong>
+            <ol>
+              <li><strong>Late fees.</strong> Overdue balances may be subject to a late fee of 1.5% per month, equivalent to 18% annually, to the extent permitted by California law.</li>
+              <li><strong>Early payment discount.</strong> A 2/10 Net 30 discount may be offered: 2% discount if payment is received within 10 days; otherwise the full balance is due within 30 days.</li>
+              <li><strong>Purchase Order requirement.</strong> A valid Purchase Order is required before work begins for all jobs exceeding $1,000.</li>
+              <li><strong>Credit check for larger accounts.</strong> Net 30 terms for balances over $10,000 are subject to a basic credit review, including D&amp;B, public records, and unpaid litigation or bankruptcy checks.</li>
+              <li><strong>Acceptance criteria for commissioning.</strong> Commissioning contracts must include objective acceptance criteria, such as required test cycles, error-free operation thresholds, inspection milestones, or other agreed performance tests.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="oem-panel">
+    <section class="oem-programs" aria-labelledby="oem-programs-title">
+      <div class="oem-header">
+        <div class="oem-eyebrow">For Robot Manufacturers &amp; System Integrators</div>
+        <h2 id="oem-programs-title">OEM Partnership Programs</h2>
+        <p>Strategic service partnerships for companies scaling robot deployments across the United States.</p>
+      </div>
+
+      <div class="oem-grid">
+        <article class="tier-card">
+          <div class="tier-badge">Entry Tier</div>
+          <h3>Authorized Service Partner</h3>
+          <p class="best-for">Best for: OEMs with up to 50 robots deployed in the US</p>
+          <ul>
+            <li>Nationwide on-site coverage via 200+ technician network</li>
+            <li>48-hour response time SLA</li>
+            <li>Standard remote support hours (Mon–Fri, 7am–10pm PT)</li>
+            <li>Quarterly service reviews</li>
+            <li>Training program for client end-users</li>
+            <li>Co-branded service reports</li>
+          </ul>
+          <div class="tier-pricing">Annual retainer + per-incident rates</div>
+          <button class="tier-cta" type="button">Request Partnership Details</button>
+        </article>
+
+        <article class="tier-card recommended">
+          <div class="tier-badge">Most Popular</div>
+          <h3>Exclusive Service Partner</h3>
+          <p class="best-for">Best for: OEMs with 50+ robots or strategic US market entry</p>
+          <ul>
+            <li>Dedicated regional service teams</li>
+            <li>24-hour response time SLA</li>
+            <li>Priority remote support, 24/7 availability</li>
+            <li>Monthly business reviews with leadership</li>
+            <li>Joint go-to-market activities and co-marketing</li>
+            <li>Custom training programs and certification</li>
+            <li>Spare parts inventory management</li>
+            <li>Field engineer escalation to US-based senior staff</li>
+          </ul>
+          <div class="tier-pricing">Annual retainer with volume-based rates</div>
+          <button class="tier-cta" type="button">Request Partnership Details</button>
+        </article>
+
+        <article class="tier-card">
+          <div class="tier-badge">Strategic</div>
+          <h3>White-Label US Operations</h3>
+          <p class="best-for">Best for: OEMs requiring full US service operations under their own brand</p>
+          <ul>
+            <li>Virtalink operates as your US service division</li>
+            <li>All field activities under your brand identity</li>
+            <li>Dedicated account leadership and field operations manager</li>
+            <li>Custom SLAs tailored to your customer commitments</li>
+            <li>Full integration with your CRM and ticketing systems</li>
+            <li>Compliance and regulatory representation in US</li>
+            <li>Regional warehousing and logistics infrastructure</li>
+          </ul>
+          <div class="tier-pricing">Custom contract — scope dependent</div>
+          <button class="tier-cta" type="button">Schedule Strategic Discussion</button>
+        </article>
+      </div>
+
+      <div class="note oem-note">
+        All partnership programs include: nationwide technician coverage, US-based account management, full insurance and compliance documentation, and integration support. Specific terms, SLAs, and pricing are tailored per partner — contact us to discuss your requirements.
+      </div>
+    </section>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
