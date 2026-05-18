@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtalink Robotics - U.S. Market-Entry Ecosystem</title>
+    <meta name="description" content="Turn your robots into real U.S. market presence. Live demos, qualified buyers, local consulting, sales conversations, and after-sales service support — from day one.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Red accents specifically for this page */
+        :root {
+            --accent-orange: #E53E3E; /* Bright red */
+            --accent-primary: #E53E3E; 
+            --accent-hover: #C53030; 
+            --accent-light: #FFF5F5;
+        }
+        
+        .hero {
+            min-height: 70vh;
+        }
+
+        /* Page specific styles to format the content well */
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .content-section:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: rgba(229, 62, 62, 0.3);
+        }
+
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .location-card {
+            background: var(--bg-light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+            transition: var(--transition);
+        }
+        .location-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .location-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+        .location-badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background: var(--accent-light);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .step-card {
+            padding: 2.5rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            transition: var(--transition);
+        }
+        .step-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.04);
+            transform: translateY(-5px);
+        }
+        .step-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent-light);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            line-height: 1;
+            z-index: 0;
+            transition: var(--transition);
+        }
+        .step-card:hover .step-number {
+            color: rgba(229, 62, 62, 0.1);
+            transform: scale(1.1);
+        }
+        .step-card h3, .step-card p {
+            position: relative;
+            z-index: 1;
+        }
+        .partnership-list {
+            list-style: none;
+            padding: 0;
+        }
+        .partnership-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 2.5rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        .partnership-list li::before {
+            content: '✓';
+            color: white;
+            background-color: var(--accent-primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        .metrics-banner {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: #111827;
+            color: white;
+            padding: 3.5rem 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .metric-item {
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        .metric-label {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        .contact-details-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        /* Form alignment */
+        .consult-grid {
+            align-items: stretch !important;
+        }
+        .consult-form-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .consult-form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .consult-form button {
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-overlay"></div>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Nava System</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#cases">Cases</a>
+                <a href="index.html#about">About</a>
+                <a href="#contact-sales">Contact</a>
+                <a href="OPManufactures.html">For Manufacturers</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content-center fade-in-up">
+                <div class="hero-badges">
+                    <span class="badge" style="border-color: var(--accent-primary); color: var(--accent-primary);">Virtalink Robotics</span>
+                    <span class="badge">Partner Ecosystem</span>
+                </div>
+                <h1>U.S. Market-Entry <span class="highlight">Ecosystem</span></h1>
+                <p class="subtitle">Turn your robots into real U.S. market presence. Live demos, qualified buyers, local consulting, sales conversations, and after-sales service support — from day one.</p>
+                <div class="hero-btns">
+                    <a href="#details" class="btn btn-primary">Explore the Network</a>
+                    <a href="#contact-sales" class="btn btn-outline">Let's Talk</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="section-padding bg-light-gray">
+            <div class="container fade-in-up">
+                
+                <div class="content-section slide-in-bottom">
+                    <h2>The Challenge: <span class="highlight">Presence on the Ground</span></h2>
+                    <p>For a robotics manufacturer, the hardest part of the U.S. market is rarely the product — it is presence on the ground. Virtalink Robotics and its partner ecosystem provide that presence: locations where your robots are seen and operated, a channel for real customer conversations, and a nationwide field service layer behind every unit after it ships.</p>
+                </div>
+
+                <div class="content-section slide-in-bottom" style="animation-delay: 0.1s;">
+                    <h2>Demo & Showroom Network</h2>
+                    <p>Four locations are available now; selected demo units can be placed as soon as partnership terms are aligned.</p>
+                    
+                    <div class="network-grid">
+                        <div class="location-card">
+                            <span class="location-badge">U.S. Market</span>
+                            <h4>Mountain View, CA</h4>
+                            <p style="font-size: 0.95rem;">Primary U.S. demo & showroom location</p>
+                        </div>
+                        <div class="location-card">
+                            <span class="location-badge">U.S. Market</span>
+                            <h4>San Francisco, CA</h4>
+                            <p style="font-size: 0.95rem;">Demo presence in a core innovation hub</p>
+                        </div>
+                        <div class="location-card">
+                            <span class="location-badge">U.S. Market</span>
+                            <h4>Miami, FL</h4>
+                            <p style="font-size: 0.95rem;">Southeast U.S. demo & customer access point</p>
+                        </div>
+                        <div class="location-card">
+                            <span class="location-badge" style="background: #E2E8F0; color: #475569;">INTL Market</span>
+                            <h4>Dubai, UAE</h4>
+                            <p style="font-size: 0.95rem;">International expansion point beyond the U.S. network</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin: 4rem 0 2rem; text-align: center;" class="fade-in-up">
+                    <h2>What Your Robots Get</h2>
+                    <p>An ecosystem built to showcase, sell, and support your technology.</p>
+                </div>
+
+                <div class="step-cards">
+                    <div class="step-card slide-in-bottom">
+                        <div class="step-number">01</div>
+                        <h3>Robotics Ecosystem & Showroom Locations</h3>
+                        <p style="margin-top: 1rem;">Four physical demo locations across key markets — three in the U.S., one international. Each is a living environment of founders, engineers, developers, investors, and early adopters, not a rented room. Selected demo units can be placed as soon as partnership terms are aligned.</p>
+                    </div>
+                    <div class="step-card slide-in-bottom" style="animation-delay: 0.1s;">
+                        <div class="step-number">02</div>
+                        <h3>Sales, Demos & Market Development</h3>
+                        <p style="margin-top: 1rem;">Live demonstrations for prospective buyers, qualified B2B conversations, local customer education, lead generation, and direct market feedback — a local sales window that helps turn early interest into real commercial opportunities.</p>
+                    </div>
+                    <div class="step-card slide-in-bottom" style="animation-delay: 0.2s;">
+                        <div class="step-number">03</div>
+                        <h3>After-Sales Service & Repair Coverage</h3>
+                        <p style="margin-top: 1rem;">A nationwide field service network handles repair, maintenance, troubleshooting, and deployment support — so buyers commit with confidence and your robots stay backed long after the sale.</p>
+                    </div>
+                </div>
+
+                <div class="content-section slide-in-bottom" style="margin-top: 4rem;">
+                    <h2>Partnership Formats</h2>
+                    <p style="margin-bottom: 2.5rem; font-size: 1.1rem;">The model stays open. A robotics manufacturer can enter through whichever format fits its stage and goals or combine several as the relationship develops.</p>
+                    
+                    <ul class="partnership-list">
+                        <li><strong style="color: var(--text-main);">Demo & loaner units:</strong> Selected units placed for live demonstration. Ownership and intellectual property stay with you.</li>
+                        <li><strong style="color: var(--text-main);">Showroom placement:</strong> Ongoing presence across the location network, in front of qualified U.S. buyers and B2B partners.</li>
+                        <li><strong style="color: var(--text-main);">Consignment:</strong> Units held locally and sold through the ecosystem under agreed commercial terms.</li>
+                        <li><strong style="color: var(--text-main);">Distribution partnership:</strong> A structured local sales channel activated as U.S. demand is validated.</li>
+                        <li><strong style="color: var(--text-main);">After-sales service partnership:</strong> Repair and maintenance coverage attached to deployed units, lowering risk for every buyer.</li>
+                    </ul>
+                    
+                    <div style="background: var(--bg-light-gray); padding: 1.5rem; border-radius: 8px; margin-top: 2.5rem; border-left: 4px solid var(--text-muted);">
+                        <p style="font-style: italic; margin: 0; color: var(--text-main);">Built to accelerate you now, and back you later. The pilot is deliberately small and low-risk — but it opens a path to real U.S. market presence and an after-sales network that makes every future sale easier to close.</p>
+                    </div>
+                </div>
+
+                <div class="content-section slide-in-bottom" style="border-color: rgba(229, 62, 62, 0.2); box-shadow: 0 10px 40px rgba(229, 62, 62, 0.05);">
+                    <h2>Why It Is Credible</h2>
+                    <p>The after-sales layer is built on a proven U.S. field operation with 10+ years supporting major national telecom and cable operators — dispatch, vetted technicians, SLA management, parts logistics, structured reporting, insurance, and quality control already in place, now adapted to robotics. For a manufacturer, that means SLA-backed after-sales support customers can rely on from the very first deployment.</p>
+                    
+                    <div class="metrics-banner">
+                        <div class="metric-item">
+                            <div class="metric-value">200+</div>
+                            <div class="metric-label">Field Engineers</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">10+ yrs</div>
+                            <div class="metric-label">U.S. Field Ops</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">24 / 7</div>
+                            <div class="metric-label">Service Intake</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">USA</div>
+                            <div class="metric-label">Multi-State Coverage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section slide-in-bottom" style="text-align: center; background: linear-gradient(135deg, var(--accent-light) 0%, white 100%); border: 1px solid rgba(229, 62, 62, 0.2);">
+                    <h2>Suggested First Step</h2>
+                    <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.8;">A simple, low-commitment start: place one selected demo unit in the Mountain View location. It validates real customer interest, generates concrete market feedback, and gives both sides the information needed to define the right commercial model — demo placement, consignment, distribution, after-sales service, or a combination.</p>
+                    
+                    <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-top: 2rem;">Your robots — seen, sold, and supported where the U.S. market actually is.</h3>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact-sales" class="consultation section-padding">
+            <div class="container">
+                <div class="consult-grid fade-in-up">
+                    <div class="consult-info">
+                        <h2>LET’S <span class="highlight">TALK</span></h2>
+                        <p style="margin-bottom: 2.5rem; font-size: 1.1rem;">Let’s discuss demo placement, distribution, and after-sales service partnership options for your robots.</p>
+                        
+                        <div class="contact-details-box">
+                            <h4 style="color: var(--accent-primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Primary Contact</h4>
+                            <p style="margin-bottom: 0.25rem; font-size: 1.2rem; color: var(--text-main);"><strong>Sergei Kalitov</strong></p>
+                            <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--text-muted);">Head of Robotics, Virtalink Robotics</p>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <p style="font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:biz@virtalink.com">biz@virtalink.com</a>
+                                </p>
+                                <p style="font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <a href="tel:+15102857521">+1 510 285 7521</a> <span style="color: var(--text-muted); font-size: 0.8rem;">(Phone/WhatsApp)</span>
+                                </p>
+                                <p style="font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    <a href="https://linkedin.com/in/sergei-kalitov" target="_blank">linkedin.com/in/sergei-kalitov</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-details-box" style="background: transparent; margin-bottom: 0;">
+                            <h4 style="color: var(--accent-primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Strategic Contact</h4>
+                            <p style="margin-bottom: 0.25rem; font-size: 1.1rem; color: var(--text-main);"><strong>Vadim Volgin</strong></p>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-muted);">Co-founder & CEO, Virtalink LLC</p>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <p style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <a href="mailto:v@volgins.com">v@volgins.com</a>
+                                </p>
+                                <p style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                    <a href="https://virtalink.com/robotics" target="_blank">virtalink.com/robotics</a>
+                                </p>
+                                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-muted);">Virtalink LLC — registered in Texas, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="consult-form-container">
+                        <form action="https://formspree.io/f/sergeykoloto@gmail.com" method="POST" class="consult-form" id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="_replyto" placeholder="john@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="(510) 000-0000">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Robotics Manufacturer Inc.">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="4" placeholder="Tell us about your robots and goals for the U.S. market..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Send Message →</button>
+                            <p class="form-note">Your data is handled with engineering precision and privacy.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo footer-logo">
+                        <span class="logo-text">Nava System</span>
+                    </a>
+                    <p class="company-desc">Engineering the Future of Intelligence.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Explore</h3>
+                    <ul class="contact-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#cases">Cases</a></li>
+                        <li><a href="OPManufactures.html">For Manufacturers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Sergei Kalitov, CEO</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <a href="mailto:beginning@nava-system.com">beginning@nava-system.com</a>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <a href="tel:5102857521">(510) 285-7521</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nava System / Virtalink Robotics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to handle fade-in animations on scroll
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up, .slide-in-bottom').forEach((elem) => {
+                observer.observe(elem);
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '80px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'white';
+                    navLinks.style.padding = '1rem';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
