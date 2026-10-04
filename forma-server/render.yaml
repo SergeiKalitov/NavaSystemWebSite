@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: forma
+    runtime: python
+    rootDir: forma-server
+    plan: 0.5c-512mb
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --threads 4 --bind 0.0.0.0:$PORT --access-logfile -
+    healthCheckPath: /healthz
+    disk:
+      name: forma-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FORMA_LOGIN
+        value: forma
+      - key: FORMA_PASSWORD_HASH
+        sync: false
