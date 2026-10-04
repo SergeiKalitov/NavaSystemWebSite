@@ -21,6 +21,7 @@ app.config.update(
 )
 LOGIN = os.environ.get('FORMA_LOGIN', 'forma')
 PASSWORD_HASH = os.environ['FORMA_PASSWORD_HASH']
+HEALTH_TOKEN = os.environ.get('FORMA_HEALTH_TOKEN', '')
 DB = Path(os.environ.get('FORMA_DB', '/var/data/forma.sqlite3'))
 DB.parent.mkdir(parents=True, exist_ok=True)
 with sqlite3.connect(DB) as db:
@@ -100,6 +101,47 @@ def read_diary():
     with sqlite3.connect(DB) as db:
         data, version = db.execute('SELECT data, version FROM diary WHERE id=1').fetchone()
     return jsonify(state=json.loads(data), version=version)
+
+
+@app.post('/api/health/import')
+def import_health():
+    """Merge one day's Apple Health values into the diary.
+
+    This endpoint is intended for an iPhone Shortcut. It uses a separate
+    bearer token so the Shortcut never needs the interactive Forma password.
+    """
+    if not HEALTH_TOKEN:
+        return jsonify(error='Health import is not configured.'), 503
+    supplied = request.headers.get('Authorization', '')
+    if not supplied.startswith('Bearer ') or not hmac.compare_digest(supplied[7:], HEALTH_TOKEN):
+        return jsonify(error='Unauthorized.'), 401
+    payload = request.get_json(silent=True) or {}
+    date_value = payload.get('date')
+    try:
+        from datetime import date
+        if date(date.fromisoformat(date_value).year, date.fromisoformat(date_value).month, date.fromisoformat(date_value).day).isoformat() != date_value:
+            raise ValueError
+    except (AttributeError, TypeError, ValueError):
+        return jsonify(error='date must be YYYY-MM-DD.'), 400
+    allowed = ('weight', 'height', 'steps', 'sleep', 'pulse', 'wellbeing')
+    values = {}
+    for key in allowed:
+        if key in payload and payload[key] is not None:
+            if type(payload[key]) not in (int, float) or not 0 <= payload[key] <= 200000:
+                return jsonify(error=f'Invalid {key}.'), 400
+            values[key] = payload[key]
+    if not values:
+        return jsonify(error='No health values supplied.'), 400
+    with sqlite3.connect(DB, timeout=15) as db:
+        data, version = db.execute('SELECT data, version FROM diary WHERE id=1').fetchone()
+        state = json.loads(data)
+        records = [r for r in state['records'] if not (r.get('kind') == 'health' and r.get('date') == date_value and r.get('source') == 'apple-health')]
+        records.append({'id': f'apple-health-{date_value}', 'kind': 'health', 'date': date_value, 'source': 'apple-health', 'note': 'Imported from Apple Health', **values})
+        next_state = {'demo': False, 'records': records}
+        result = db.execute('UPDATE diary SET data=?, version=version+1 WHERE id=1 AND version=?', (json.dumps(next_state, allow_nan=False), version))
+        if result.rowcount != 1:
+            return jsonify(error='Diary changed while importing. Try again.'), 409
+    return jsonify(ok=True, date=date_value, values=values)
 
 
 def valid_state(state):
