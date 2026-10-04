@@ -55,6 +55,9 @@ def headers(response):
 @app.before_request
 def csrf_check():
     if request.method == 'POST':
+        # Device imports authenticate with their own bearer token below.
+        if request.path == '/api/health/import':
+            return None
         token = request.headers.get('X-CSRF-Token') if request.path.startswith('/api/') else request.form.get('csrf')
         expected = session.get('csrf')
         if not expected or not token or not hmac.compare_digest(expected, token):
