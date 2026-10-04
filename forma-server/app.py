@@ -5,6 +5,7 @@ import secrets
 import sqlite3
 import threading
 import time
+import re
 from functools import wraps
 from pathlib import Path
 
@@ -130,9 +131,15 @@ def import_health():
     values = {}
     for key in allowed:
         if key in payload and payload[key] is not None:
-            if type(payload[key]) not in (int, float) or not 0 <= payload[key] <= 200000:
+            raw_value = payload[key]
+            if isinstance(raw_value, dict) and 'value' in raw_value:
+                raw_value = raw_value['value']
+            if isinstance(raw_value, str):
+                match = re.search(r'-?\d+(?:\.\d+)?', raw_value.replace(',', '.'))
+                raw_value = float(match.group()) if match else None
+            if type(raw_value) not in (int, float) or not 0 <= raw_value <= 200000:
                 return jsonify(error=f'Invalid {key}.'), 400
-            values[key] = payload[key]
+            values[key] = raw_value
     if not values:
         return jsonify(error='No health values supplied.'), 400
     with sqlite3.connect(DB, timeout=15) as db:
