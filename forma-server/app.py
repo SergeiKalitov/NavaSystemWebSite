@@ -127,7 +127,7 @@ def import_health():
             raise ValueError
     except (AttributeError, TypeError, ValueError):
         return jsonify(error='date must be YYYY-MM-DD.'), 400
-    allowed = ('weight', 'height', 'steps', 'sleep', 'pulse', 'wellbeing')
+    allowed = ('weight', 'height', 'steps', 'sleep', 'pulse', 'wellbeing', 'protein')
     values = {}
     for key in allowed:
         if key in payload and payload[key] is not None:
@@ -172,7 +172,7 @@ def valid_state(state):
             return False
         if 'muscles' in r and (not isinstance(r['muscles'], list) or any(g not in ('Arms', 'Shoulders', 'Legs', 'Core') for g in r['muscles'])):
             return False
-        for key in ('duration', 'distance', 'weight', 'height', 'steps', 'sleep', 'pulse', 'wellbeing'):
+        for key in ('duration', 'distance', 'weight', 'height', 'steps', 'sleep', 'pulse', 'wellbeing', 'protein'):
             if key in r and (type(r[key]) not in (int, float) or not 0 <= r[key] <= 200000):
                 return False
     return True
